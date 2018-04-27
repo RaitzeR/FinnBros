@@ -5,6 +5,7 @@ from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
 import json
 from urllib.parse import urlparse
+from django.db import IntegrityError
 
 def index(request):
     return render(request, 'index.html', {
@@ -25,3 +26,12 @@ def get_food_posts(request):
         pass
 
     return jsonresp
+
+def create_food_post(request):
+    title = request.POST.get("title")
+    try:
+        new_food_post = FoodPost(title=title)
+        new_food_post.save()
+    except IntegrityError as e:
+        return JsonResponse({"message": e.args})
+    return HttpResponse(200)
