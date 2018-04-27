@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from foodapp.models import FoodPost, Category
+from foodapp.models import Food, FoodCategory
 from foodapp.helpers import *
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
@@ -28,17 +28,17 @@ def categories_to_food_post(request):
     post_id = request.GET.get("post_id")
 
     for cat in cat_titles:
-        post_to_attach = FoodPost.get.objects(pk=int(post_id))
+        post_to_attach = Food.get.objects(pk=int(post_id))
         try:
-            cat_to_attach = Category.objects.get(title=cat)
-        except Category.ObjectNotFound:
+            cat_to_attach = FoodCategory.objects.get(title=cat)
+        except FoodCategory.ObjectNotFound:
             cat_to_attach = Category(title=cat)
             cat_to_attach.save()
         post_to_attach.categories.add(cat_to_attach)
 
 # List all posts to front-end
 def get_food_posts(request):
-    food_posts = FoodPost.objects.all()
+    food_posts = Food.objects.all()
     food_posts_json = serialize('json', food_posts)
 
     jsonresp = JsonResponse(food_posts_json, safe=False)
@@ -51,7 +51,7 @@ def create_food_post(request):
     title = request.GET.get("title")
 
     try:
-        new_food_post = FoodPost(title=title)
+        new_food_post = Food(title=title)
         new_food_post.save()
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})
@@ -68,7 +68,7 @@ def edit_food_post(request):
     id = request.GET.get("id")
 
     try:
-        food_post = FoodPost.objects.get(pk=int(id))
+        food_post = Food.objects.get(pk=int(id))
         food_post.title = title
         food_post.save()
     except IntegrityError as e:
@@ -85,7 +85,7 @@ def delete_food_post(request):
     id = request.GET.get("id")
 
     try:
-        food_post = FoodPost.objects.get(pk=int(id))
+        food_post = Food.objects.get(pk=int(id))
         food_post.delete()
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})
