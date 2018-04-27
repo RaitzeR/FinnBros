@@ -1,5 +1,5 @@
 # Inherit from standard settings file for default
-from selectboxsite.settings import *
+from finnbros.settings import *
 import dj_database_url
 
 # Everything below will override our standard settings:
