@@ -36,8 +36,8 @@ def get_food_posts(request):
 
 
 def create_food_post(request):
-    title = request.POST.get("title")
-
+    title = request.GET.get("title")
+    print(title)
     try:
         new_food_post = FoodPost(title=title)
         new_food_post.save()
@@ -51,8 +51,8 @@ def create_food_post(request):
     return resp
 
 def edit_food_post(request):
-    title = request.POST.get("title")
-    id = request.POST.get("id")
+    title = request.GET.get("title")
+    id = request.GET.get("id")
 
     try:
         food_post = FoodPost.objects.get(pk=int(id))
@@ -68,7 +68,7 @@ def edit_food_post(request):
     return resp
 
 def delete_food_post(request):
-    id = request.POST.get("id")
+    id = request.GET.get("id")
 
     try:
         food_post = FoodPost.objects.get(pk=int(id))
