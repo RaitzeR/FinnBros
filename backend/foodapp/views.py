@@ -6,6 +6,8 @@ from django.http import HttpResponse, JsonResponse
 import json
 from urllib.parse import urlparse
 from django.db import IntegrityError
+from Vision import ImageClasses
+
 
 def get_referrer_root(request):
     try:
@@ -16,10 +18,12 @@ def get_referrer_root(request):
         referrer_root = ""
     return referrer_root
 
+
 def index(request):
     return render(request, 'index.html', {
 
     })
+
 
 def get_food_posts(request):
     food_posts = FoodPost.objects.all()
@@ -29,6 +33,7 @@ def get_food_posts(request):
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
 
     return jsonresp
+
 
 def create_food_post(request):
     title = request.POST.get("title")
@@ -44,3 +49,9 @@ def create_food_post(request):
     resp = HttpResponse(200)
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
+
+
+def classify_image(request):
+    url = request.POST.get("image_url")
+    imageClasses = ImageClasses(image_url=url, threshold="0.5")
+    classes = imageClasses.classes
