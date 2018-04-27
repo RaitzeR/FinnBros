@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from foodapp.models import FoodPost
+from foodapp.models import FoodPost, Category
 from foodapp.helpers import *
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
@@ -11,6 +11,19 @@ def index(request):
     return render(request, 'index.html', {
 
     })
+
+def get_img_categories(request):
+    url = request.GET.get("image_url")
+    imageClasses = ImageClasses(image_url=url, threshold="0.5")
+    classes = imageClasses.classes
+
+    jsonresp = JsonResponse(classes, safe=False)
+    jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+
+    return jsonresp
+
+def categories_to_food_posts(request):
+    pass
 
 def get_food_posts(request):
     food_posts = FoodPost.objects.all()

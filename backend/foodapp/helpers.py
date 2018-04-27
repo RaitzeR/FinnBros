@@ -11,6 +11,6 @@ def get_referrer_root(request):
     return referrer_root
 
 def classify_image(request):
-    url = request.POST.get("image_url")
+    url = request.GET.get("image_url")
     imageClasses = ImageClasses(image_url=url, threshold="0.5")
     classes = imageClasses.classes
