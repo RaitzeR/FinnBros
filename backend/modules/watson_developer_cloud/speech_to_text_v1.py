@@ -27,7 +27,7 @@ from __future__ import absolute_import
 import json
 from .watson_service import WatsonService, _remove_null_values
 from .utils import deprecated
-from watson_developer_cloud.websocket import RecognizeCallback, RecognizeListener
+from modules.watson_developer_cloud.websocket import RecognizeCallback, RecognizeListener
 import base64
 try:
     from urllib.parse import urlencode

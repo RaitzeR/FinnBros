@@ -18,7 +18,7 @@ The v1 Authorization "service" that enables developers to
 retrieve a temporary access token
 """
 
-from watson_developer_cloud.watson_service import WatsonService
+from modules.watson_developer_cloud.watson_service import WatsonService
 
 try:
     import urllib.parse as urlparse  # Python 3

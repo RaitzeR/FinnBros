@@ -1,4 +1,4 @@
-from watson_developer_cloud import VisualRecognitionV3
+from modules.watson_developer_cloud import VisualRecognitionV3
 from operator import itemgetter
 
 
