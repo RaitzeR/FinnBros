@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from urllib.parse import urlparse
 from django.db import IntegrityError
-from .Vision import ImageClasses
+#from .Vision import ImageClasses
 
 
 def get_referrer_root(request):
