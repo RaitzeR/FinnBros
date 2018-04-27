@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit_food_post/', views.edit_food_post),
     path('delete_food_post/', views.delete_food_post),
     path('get_img_categories/', views.get_img_categories),
+    path('categories_to_food_post/', views.categories_to_food_post),
 ]

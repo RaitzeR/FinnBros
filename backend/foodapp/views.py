@@ -12,6 +12,7 @@ def index(request):
 
     })
 
+# Give image categories to front-end
 def get_img_categories(request):
     url = request.GET.get("image_url")
     imageClasses = ImageClasses(image_url=url, threshold="0.5")
@@ -19,12 +20,23 @@ def get_img_categories(request):
 
     jsonresp = JsonResponse(classes, safe=False)
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
-
     return jsonresp
 
-def categories_to_food_posts(request):
-    pass
+# Attach categories to food post. Front-end gives category name in array
+def categories_to_food_post(request):
+    cat_titles = request.GET.getlist("category_titles[]")
+    post_id = request.GET.get("post_id")
 
+    for cat in cat_titles:
+        post_to_attach = FoodPost.get.objects(pk=int(post_id))
+        try:
+            cat_to_attach = Category.objects.get(title=cat)
+        except Category.ObjectNotFound:
+            cat_to_attach = Category(title=cat)
+            cat_to_attach.save()
+        post_to_attach.categories.add(cat_to_attach)
+
+# List all posts to front-end
 def get_food_posts(request):
     food_posts = FoodPost.objects.all()
     food_posts_json = serialize('json', food_posts)
@@ -34,6 +46,7 @@ def get_food_posts(request):
 
     return jsonresp
 
+# Create post
 def create_food_post(request):
     title = request.GET.get("title")
 
@@ -49,6 +62,7 @@ def create_food_post(request):
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
+# Edit post
 def edit_food_post(request):
     title = request.GET.get("title")
     id = request.GET.get("id")
@@ -66,6 +80,7 @@ def edit_food_post(request):
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
+# Delete post
 def delete_food_post(request):
     id = request.GET.get("id")
 
