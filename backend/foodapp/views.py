@@ -44,3 +44,35 @@ def create_food_post(request):
     resp = HttpResponse(200)
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
+
+def edit_food_post(request):
+    title = request.POST.get("title")
+    id = request.POST.get("id")
+
+    try:
+        food_post = FoodPost.objects.get(pk=int(id))
+        food_post.title = title
+        food_post.save()
+    except IntegrityError as e:
+        resp = JsonResponse({"message": e.args})
+        resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+        return resp
+
+    resp = HttpResponse(200)
+    resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+    return resp
+
+def delete_food_post(request):
+    id = request.POST.get("id")
+
+    try:
+        food_post = FoodPost.objects.get(pk=int(id))
+        food_post.delete()
+    except IntegrityError as e:
+        resp = JsonResponse({"message": e.args})
+        resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+        return resp
+
+    resp = HttpResponse(200)
+    resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+    return resp
