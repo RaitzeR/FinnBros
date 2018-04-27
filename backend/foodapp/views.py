@@ -50,7 +50,6 @@ def create_food_post(request):
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
-<<<<<<< HEAD
 def edit_food_post(request):
     title = request.POST.get("title")
     id = request.POST.get("id")
@@ -82,10 +81,3 @@ def delete_food_post(request):
     resp = HttpResponse(200)
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
-=======
-
-def classify_image(request):
-    url = request.POST.get("image_url")
-    imageClasses = ImageClasses(image_url=url, threshold="0.5")
-    classes = imageClasses.classes
->>>>>>> e314433b3e38aba0a9bfaf1fbd3d19fcae4a8b38
