@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from urllib.parse import urlparse
 from django.db import IntegrityError
-from Vision import ImageClasses
+from .Vision import ImageClasses
 
 
 def get_referrer_root(request):
@@ -82,7 +82,9 @@ def delete_food_post(request):
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
+'''
 def classify_image(request):
     url = request.POST.get("image_url")
     imageClasses = ImageClasses(image_url=url, threshold="0.5")
     classes = imageClasses.classes
+'''
