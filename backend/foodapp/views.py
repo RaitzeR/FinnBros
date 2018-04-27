@@ -1,29 +1,16 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from foodapp.models import FoodPost
+from foodapp.helpers import *
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
 import json
-from urllib.parse import urlparse
 from django.db import IntegrityError
-from .Vision import ImageClasses
-
-
-def get_referrer_root(request):
-    try:
-        # If getting from outside heroku, get referrer_root and allow in CORS
-        parsed = urlparse(request.META['HTTP_REFERER'])
-        referrer_root = parsed.scheme + "://" + parsed.netloc
-    except KeyError:
-        referrer_root = ""
-    return referrer_root
-
 
 def index(request):
     return render(request, 'index.html', {
 
     })
-
 
 def get_food_posts(request):
     food_posts = FoodPost.objects.all()
@@ -34,10 +21,9 @@ def get_food_posts(request):
 
     return jsonresp
 
-
 def create_food_post(request):
     title = request.GET.get("title")
-    print(title)
+
     try:
         new_food_post = FoodPost(title=title)
         new_food_post.save()
@@ -81,9 +67,3 @@ def delete_food_post(request):
     resp = HttpResponse(200)
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
-
-
-def classify_image(request):
-    url = request.POST.get("image_url")
-    imageClasses = ImageClasses(image_url=url, threshold="0.5")
-    classes = imageClasses.classes
