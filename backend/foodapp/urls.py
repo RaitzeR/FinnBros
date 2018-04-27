@@ -5,5 +5,5 @@ from django.urls import path
 urlpatterns = [
     #url(r'^$', views.HomePageView.as_view()),
     path('', views.index),
-    url(r'^links/$' , views.LinksPageView.as_view()),
+    path('get_food_posts/', views.get_food_posts),
 ]
