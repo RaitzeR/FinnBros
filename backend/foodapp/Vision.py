@@ -19,8 +19,15 @@ class ImageClasses:
             version="2018-03-19"
         )
 
-        with open(self.image_url, 'rb') as f:
-            response = vision.classify(images_file=f,
+        if "http" not in self.image_url:
+            with open(self.image_url, 'rb') as f:
+                response = vision.classify(images_file=f,
+                                           threshold=self.threshold,
+                                           accept_language="en",
+                                           classifier_ids=["food"],
+                                           owners=["IBM"])
+        else:
+            response = vision.classify(url=self.image_url,
                                        threshold=self.threshold,
                                        accept_language="en",
                                        classifier_ids=["food"],
