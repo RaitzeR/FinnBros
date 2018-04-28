@@ -1,0 +1,17 @@
+from urllib.parse import urlparse
+
+def get_referrer_root(request):
+    try:
+        # If getting from outside heroku, get referrer_root and allow in CORS
+        parsed = urlparse(request.META['HTTP_REFERER'])
+        referrer_root = parsed.scheme + "://" + parsed.netloc
+    except KeyError:
+        referrer_root = ""
+    return referrer_root
+
+# Just for testing
+def index(request):
+    from django.shortcuts import render
+    return render(request, 'index.html', {
+
+    })
