@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class FirebaseUser(models.Model):
-    firebase_id = models.IntegerField(blank=True, default=0)
+    firebase_id = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return str(self.firebase_id)

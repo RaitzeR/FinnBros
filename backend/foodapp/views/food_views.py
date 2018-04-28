@@ -58,7 +58,7 @@ def food_create(request):
     title = request.GET.get("title")
     image_url = request.GET.get("image_url")
     owner = request.GET.get("owner")
-    user = FirebaseUser.objects.get(firebase_id=int(owner))
+    user = FirebaseUser.objects.get(firebase_id=owner)
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
@@ -99,7 +99,7 @@ def food_edit(request):
         geoLocate = GeoLocate(address=street_address, city=city, country=country)
         longitude = geoLocate.geocode["lng"]
         latitude = geoLocate.geocode["lat"]
-    
+
     try:
         food_post = Food.objects.get(pk=int(id))
         food_post.title = title

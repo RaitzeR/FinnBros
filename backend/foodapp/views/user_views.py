@@ -21,7 +21,7 @@ def user_create(request):
 
 def user_get(request):
     id = request.GET.get("id")
-    user = FirebaseUser.objects.filter(firebase_id=int(id))
+    user = FirebaseUser.objects.filter(firebase_id=id)
 
     # User not found
     if len(user) == 0:
@@ -51,7 +51,7 @@ def user_delete(request):
     id = request.GET.get("id")
 
     try:
-        user = FirebaseUser.objects.get(firebase_id=int(id))
+        user = FirebaseUser.objects.get(firebase_id=id)
         user.delete()
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})
