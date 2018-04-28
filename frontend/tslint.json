@@ -83,7 +83,7 @@
       "check-separator",
       "check-type"
     ],
-    "directive-selector": [true, "attribute", "app", "bro", "camelCase"],
+    "directive-selector": [false, "attribute", "app", "bro", "camelCase"],
     "component-selector": [false, "element", "app", "bro", "kebab-case"],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

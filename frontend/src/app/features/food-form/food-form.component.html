@@ -1,0 +1,50 @@
+<div class="dropzone" broDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+  <h3>Select and image</h3>
+
+  <div class="file">
+    <label class="file-label">
+      <input mat-input class="file-input" type="file" (change)="startUpload($event.target.files)" accept="image/*" id="capture"
+        capture="camera">
+
+
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fa fa-upload"></i>
+        </span>
+        <span class="file-label">
+          or choose a file…
+        </span>
+      </span>
+    </label>
+  </div>
+</div>
+
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <mat-form-field class="input-full-width">
+    <input matInput placeholder="Food's name" name="title" [(ngModel)]="data.title" required>
+  </mat-form-field>
+  <mat-form-field class="date-full-width">
+    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="When food expires" name="expires" [(ngModel)]="data.expires"
+      required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div class="inputRow">
+
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="Pickup address" name="street_address" [(ngModel)]="data.street_address" required>
+    </mat-form-field>
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="City" name="city" [(ngModel)]="data.city" required>
+    </mat-form-field>
+  </div>
+
+  <mat-chip-list class="mat-chip-list-stacked">
+    <h4>Categories:</h4>
+    <mat-chip *ngFor="let chip of data.categories" selected="true">
+      {{chip}}
+    </mat-chip>
+  </mat-chip-list>
+
+  <button class="submit" mat-raised-button color="primary" type="submit" [disabled]="!heroForm.form.valid">Submit</button>
+</form>

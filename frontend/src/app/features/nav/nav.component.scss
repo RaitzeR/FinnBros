@@ -1,13 +1,13 @@
 :host {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 10px;
+  left: 10px;
   z-index: 100;
   padding: 0 42px;
   height: 64px;
   display: flex;
   align-items: center;
+  background: #fff;
   a {
     text-decoration: none;
     margin: 0 10px;

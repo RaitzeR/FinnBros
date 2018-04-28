@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav.component';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { FoodFormModule } from '@features/food-form/food-form.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    FoodFormModule,
+    MatDialogModule
+  ],
   declarations: [NavComponent],
   exports: [NavComponent],
   bootstrap: [NavComponent]
