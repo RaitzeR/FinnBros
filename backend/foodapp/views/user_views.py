@@ -93,7 +93,3 @@ def rate_user(request):
         resp = JsonResponse({"message": e.args})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
-
-    resp = HttpResponse(200)
-    resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
-    return resp
