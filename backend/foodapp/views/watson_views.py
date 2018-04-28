@@ -1,4 +1,6 @@
 from foodapp.Vision import ImageClasses
+from django.http import HttpResponse, JsonResponse
+from foodapp.views.helpers import *
 
 # Give image categories to front-end
 def img_categories(request):

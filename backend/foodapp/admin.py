@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Food
+from .models import FirebaseUser, FoodCategory, Food, UserRating, Community
 
+admin.site.register(FirebaseUser)
+admin.site.register(FoodCategory)
 admin.site.register(Food)
-# Register your models here.
+admin.site.register(UserRating)
+admin.site.register(Community)
