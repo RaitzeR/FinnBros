@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from foodapp.models import Community, FirebaseUser
+from foodapp.models import Community, FirebaseUser, Food
 from django.http import HttpResponse, JsonResponse
 import json
 from foodapp.views.helpers import *
@@ -36,12 +36,16 @@ def community_get(request):
         jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return jsonresp
 
-    #comm_foods = user[0].food_set.all()
-    #comm_users = user[0].community_set.all()
+    comm_users = comm[0].users.all()
+    comm_foods = []
+    for comm_user in comm_users:
+        user_foods = comm_user.food_set.all()
+        for user_food in user_foods:
+            comm_foods.append(user_food)
 
     comm_json = serialize('json', comm)
-    comm_foods_json = ["work in progress"]
-    comm_users_json = ["work in progress"]
+    comm_foods_json = serialize('json', comm_foods)
+    comm_users_json =  serialize('json', comm_users)
 
     data = {
         "comm": comm_json,

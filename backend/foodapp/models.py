@@ -20,6 +20,8 @@ class Food(models.Model):
     categories = models.ManyToManyField(FoodCategory, blank=True)
     user = models.ForeignKey(FirebaseUser, on_delete=models.CASCADE, null=True)
     street_address = models.CharField(max_length=255, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     city = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
     is_bought = models.BooleanField(default=False)

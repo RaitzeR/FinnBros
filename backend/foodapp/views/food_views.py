@@ -21,6 +21,12 @@ def food_get(request):
     id = request.GET.get("id")
 
     food = Food.objects.filter(pk=int(id))
+    # User not found
+    if len(food) == 0:
+        jsonresp = JsonResponse({"error": "not found"}, safe=False)
+        jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+        return jsonresp
+
     food_json = json.loads(serialize('json', food))
 
     category_list = []
@@ -73,6 +79,8 @@ def food_create(request):
             image_url=image_url,
             user=owner,
             street_address=street_address,
+            latitude=latitude,
+            longitude=longitude,
             city=city,
             country=country
         )
@@ -106,6 +114,8 @@ def food_edit(request):
         food_post.image_url = image_url
         food_post.owner = owner
         food_post.street_address = street_address
+        food_post.latitude = latitude
+        food_post.longitude = longitude
         food_post.city = city
         food_post.country = country
         food_post.save()
