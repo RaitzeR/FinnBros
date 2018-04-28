@@ -64,9 +64,9 @@ def user_delete(request):
 
 def user_get_rating(request):
     id = request.GET.get("id")
-
+    rated = FirebaseUser.objects.get(firebase_id=id)
     try:
-        ratings = UserRating.objects.filter(rated=id)
+        ratings = UserRating.objects.filter(rated=rated)
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
@@ -87,6 +87,9 @@ def rate_user(request):
     rator = request.GET.get("rator")
     rated = request.GET.get("rated")
     rating = request.GET.get("rating")
+
+    rator = FirebaseUser.objects.get(firebase_id=rator)
+    rated = FirebaseUser.objects.get(firebase_id=rated)
 
     try:
         new_rating = UserRating(rator=rator,rated=rated,rating=rating)

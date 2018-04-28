@@ -23,7 +23,7 @@ urlpatterns = [
     path('community/edit', views.community_edit),
     path('community/join_user', views.community_join_user),
     path('community/leave_user', views.community_leave_user),
-    path('watson/img_categories', views.img_categories),
     path('category/categories_to_food/', views.categories_to_food),
     path('category/remove_categories/', views.remove_categories),
+    path('watson/img_categories', views.img_categories),
 ]

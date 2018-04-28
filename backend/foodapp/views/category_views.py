@@ -22,6 +22,7 @@ def categories_to_food(request):
 def remove_categories(request):
     cat_titles = request.GET.get("categories")
     food_id = request.GET.get("food_id")
+    
     food_object = Food.objects.get(pk=int(food_id))
 
     cat_titles = cat_titles.split(",")

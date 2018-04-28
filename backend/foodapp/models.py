@@ -31,8 +31,8 @@ class Food(models.Model):
         return self.title
 
 class UserRating(models.Model):
-    rator = models.IntegerField(blank=True)
-    rated = models.IntegerField(blank=True)
+    rator = models.ForeignKey(FirebaseUser, on_delete=models.CASCADE, null=True)
+    rated = models.ForeignKey(FirebaseUser, on_delete=models.CASCADE, null=True)
     rating = models.IntegerField(blank=True)
 
     def __str__(self):

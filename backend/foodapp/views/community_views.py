@@ -94,9 +94,10 @@ def community_edit(request):
     title = request.GET.get("title")
     description = request.GET.get("description")
     is_public = request.GET.get("is_public")
+    comm_id = request.GET.get("id")
 
     try:
-        comm = Community.objects.get(pk=int(id))
+        comm = Community.objects.get(pk=int(comm_id))
         comm.title = title
         comm.description = description
         comm.is_public = json.dumps(is_public)
