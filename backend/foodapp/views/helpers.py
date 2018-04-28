@@ -1,5 +1,4 @@
 from urllib.parse import urlparse
-from .Vision import ImageClasses
 
 def get_referrer_root(request):
     try:
@@ -10,7 +9,9 @@ def get_referrer_root(request):
         referrer_root = ""
     return referrer_root
 
-def classify_image(request):
-    url = request.GET.get("image_url")
-    imageClasses = ImageClasses(image_url=url, threshold="0.5")
-    classes = imageClasses.classes
+# Just for testing
+def index(request):
+    from django.shortcuts import render
+    return render(request, 'index.html', {
+
+    })
