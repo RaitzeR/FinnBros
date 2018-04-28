@@ -31,15 +31,17 @@ export class AuthService {
   }
 
   // Singup
-  public singupWithEmail(email: string, password: string, name: string) {
+  public singupWithEmail(email: string, password: string) {
     this.afa.auth
       .createUserAndRetrieveDataWithEmailAndPassword(email, password)
       .then(authCredentials => {
         const uid = authCredentials.user.uid as string;
-        const userDbData: User = {
+        const user: User = {
           uid,
           email
         };
+        console.log('Logged in as:', user);
+        this.router.navigate(['/find']);
       })
       .catch(console.error);
   }
@@ -61,6 +63,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(user => {
         console.log('Logged in as:', user);
+        this.router.navigate(['/find']);
       });
   }
 }

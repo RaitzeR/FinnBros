@@ -40,7 +40,7 @@ export class FoodFormComponent implements OnInit {
   }
 
   onSubmit(form) {
-    console.log(form);
+    console.log(form.value);
   }
 
   ngOnInit() {}

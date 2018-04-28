@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { FoodFormComponent } from '@features/food-form/food-form.component';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'bro-nav',
@@ -8,7 +10,10 @@ import { FoodFormComponent } from '@features/food-form/food-form.component';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+  public user: Observable<User>;
+  constructor(private dialog: MatDialog, private auth: AuthService) {
+    this.user = auth.getUser();
+  }
 
   ngOnInit() {}
 
@@ -28,5 +33,9 @@ export class NavComponent implements OnInit {
       data: newFoodProduct,
       panelClass: 'modalAsForm'
     });
+  }
+
+  public logout() {
+    this.auth.signOut();
   }
 }

@@ -1,0 +1,31 @@
+<div *ngIf="!(createNew | async); else createNewAccount">
+  <h3>Login</h3>
+  <form class="wrapper" (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="loginData.email" required>
+    </mat-form-field>
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="loginData.password" required>
+    </mat-form-field>
+    <button class="submit" mat-raised-button color="accent" type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+    <br>
+    <mat-divider></mat-divider>
+    <button mat-button (click)="toggleNew()">Create new account</button>
+  </form>
+</div>
+
+<ng-template #createNewAccount>
+  <h3>Create new account</h3>
+  <form class="wrapper" (ngSubmit)="createAccount(loginForm)" #loginForm="ngForm">
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="loginData.email" required>
+    </mat-form-field>
+    <mat-form-field class="input-half-width">
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="loginData.password" required>
+    </mat-form-field>
+    <button class="submit" mat-raised-button color="accent" type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+    <br>
+    <mat-divider></mat-divider>
+    <button mat-button (click)="toggleNew()">Or login</button>
+  </form>
+</ng-template>
