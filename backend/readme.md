@@ -1,35 +1,35 @@
-#Endpoints for front-end
+# Endpoints for front-end
 
 
-##User
+## User
 
-###user/create
+### user/create
 - id={{firebase uid}}
 
-###user/get
+### user/get
 - id={{firebase uid}}
 
-###user/delete
+### user/delete
 - id={{firebase uid}}
 
-###user/get_rating
+### user/get_rating
 - id={{firebase uid}}
 
-###user/rate
+### user/rate
 - rator={{firebase uid}}
 - rated={{firebase uid}}
 - rating={{some number}}
 
 
-##Food
+## Food
 
-###food/get
+### food/get
 - id={{food id}}
 
-###food/get/all
+### food/get/all
 - No parameters
 
-###food/create
+### food/create
 - title={{food name}}
 - image_url={{img url}}
 - owner={{firebase uid}}
@@ -37,7 +37,7 @@
 - city={{city}}
 - country={{country}}
 
-###food/edit
+### food/edit
 - id={{food id}}
 - title={{food name}}
 - image_url={{img url}}
@@ -46,54 +46,54 @@
 - city={{city}}
 - country={{country}}
 
-###food/buy
+### food/buy
 - buyer_id={{firebase uid}}
 - id={{food id}}
 
-###food/delete
+### food/delete
 - id={{food id}}
 
 
-##Community
+## Community
 
-###community/create
+### community/create
 - title={{title}}
 - description={{description}}
 - is_public={{true/false}}
 
-###community/get
+### community/get
 - id={{community id}}
 
-###community/delete
+### community/delete
 - id={{community id}}
 
-###community/edit
+### community/edit
 - title={{title}}
 - description={{description}}
 - is_public={{true/false}}
 - id={{community_id}}
 
-###community/join_user
+### community/join_user
 - id={{community id}}
 - user_id={{firebase uid}}
 
-###community/leave_user
+### community/leave_user
 - id={{community id}}
 - user_id={{firebase uid}}
 
 
-##Category
+## Category
 
-###category/categories_to_food
+### category/categories_to_food
 - categories={{csv}} for example "categories=porkkana,juusto,kakku"
 - food_id={{food id}}
 
-###category/remove_categories
+### category/remove_categories
 - categories={{csv}} for example "categories=porkkana,kakku"
 - food_id={{food id}}
 
 
-##Watson
+## Watson
 
-###watson/img_categories
+### watson/img_categories
 - image_url={{image url}}
