@@ -63,6 +63,8 @@
 
 ### community/get
 - id={{community id}}
+### Optional
+- filter={{csv}} for example "categories=porkkana"
 
 ### community/delete
 - id={{community id}}
