@@ -5,7 +5,7 @@
 
 ### user/create
 - id={{firebase uid}}
-- @returns {id,uid,first_name,last_name,email,password,street_address,city,country,cc_verified,company_verified,organisation_verified,communities}
+- @returns None/Failure
 
 ### user/get
 - id={{firebase uid}}
