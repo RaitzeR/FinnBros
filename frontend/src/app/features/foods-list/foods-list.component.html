@@ -1,0 +1,5 @@
+<mat-card *ngFor="let foodItem of foodList | async" class="foodcard">
+  {{foodItem.title}}
+</mat-card>
+
+<button (click)="dispatchNewFoodItem()">Push de food</button>

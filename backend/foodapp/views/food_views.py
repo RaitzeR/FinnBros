@@ -1,23 +1,40 @@
-from foodapp.models import Food
+from foodapp.models import Food, FirebaseUser
 from foodapp.views.helpers import *
 from foodapp.geolocate import GeoLocate
 from django.http import HttpResponse, JsonResponse
 from django.db import IntegrityError
-#import json
+from django.core.serializers import serialize
+import json
+#import pdb; pdb.set_trace()
+#from pprint import pprint;pprint()
 
 # List all posts to front-end
 def food_get_all(request):
-    from django.core.serializers import serialize
     food_posts = Food.objects.all()
     food_posts_json = serialize('json', food_posts)
-
     jsonresp = JsonResponse(food_posts_json, safe=False)
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
 
     return jsonresp
 
 def food_get(request):
-    pass
+    id = request.GET.get("id")
+
+    food = Food.objects.filter(pk=int(id))
+    food_json = json.loads(serialize('json', food))
+
+    category_list = []
+    for cat in food[0].categories.all():
+        dict_to_add = {}
+        dict_to_add["id"] = cat.pk
+        dict_to_add["title"] = cat.title
+        category_list.append(dict_to_add)
+
+    food_json[0]["fields"]["categories"] = category_list
+    jsonresp = JsonResponse(food_json, safe=False)
+    jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+
+    return jsonresp
 
 def food_buy(request):
     buyer_id = request.GET.get("buyer_id")
@@ -41,6 +58,7 @@ def food_create(request):
     title = request.GET.get("title")
     image_url = request.GET.get("image_url")
     owner = request.GET.get("owner")
+    user = FirebaseUser.objects.get(firebase_id=owner)
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
@@ -53,10 +71,10 @@ def food_create(request):
         new_food_post = Food(
             title=title,
             image_url=image_url,
-            owner=owner,
+            user=owner,
             street_address=street_address,
             city=city,
-            country=country,
+            country=country
         )
         new_food_post.save()
     except IntegrityError as e:

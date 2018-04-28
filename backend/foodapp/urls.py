@@ -6,6 +6,9 @@ from foodapp import views
 urlpatterns = [
     #url(r'^$', views.HomePageView.as_view()),
     path('', views.index),
+    path('user/create', views.user_create),
+    path('user/get', views.user_get),
+    path('user/delete', views.user_delete),
     path('food/get', views.food_get),
     path('food/get/all', views.food_get_all),
     path('food/create', views.food_create),
