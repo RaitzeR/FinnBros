@@ -79,6 +79,10 @@
 ### community/get
 - id={{community id}}
 - @returns {id,name,description,is_public}
+#### Optional
+- filter={{csv}} for example "categories=porkkana"
+
+
 
 ### community/delete
 - id={{community id}}
