@@ -81,7 +81,7 @@ def food_edit(request):
         geoLocate = GeoLocate(address=street_address, city=city, country=country)
         longitude = geoLocate.geocode["lng"]
         latitude = geoLocate.geocode["lat"]
-    
+
     try:
         food_post = Food.objects.get(pk=int(id))
         food_post.title = title
