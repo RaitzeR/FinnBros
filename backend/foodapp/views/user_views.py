@@ -66,7 +66,7 @@ def user_get_rating(request):
     id = request.GET.get("id")
 
     try:
-        ratings = UserRating.objects.get(rated=id)
+        ratings = UserRating.objects.filter(rated=id)
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
@@ -79,7 +79,9 @@ def user_get_rating(request):
         total_rating = total_rating + rating.rating
 
     mean_rating = total_rating / rating_count
-    return mean_rating
+    resp = JsonResponse({"mean_rating": mean_rating})
+    resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+    return resp
 
 def rate_user(request):
     rator = request.GET.get("rator")
@@ -93,3 +95,7 @@ def rate_user(request):
         resp = JsonResponse({"message": e.args})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
+
+    resp = HttpResponse(200)
+    resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+    return resp
