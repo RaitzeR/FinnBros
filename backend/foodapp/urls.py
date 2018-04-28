@@ -9,6 +9,8 @@ urlpatterns = [
     path('user/create', views.user_create),
     path('user/get', views.user_get),
     path('user/delete', views.user_delete),
+    path('user/get_rating', views.user_get_rating),
+    path('user/rate', views.rate_user),
     path('food/get', views.food_get),
     path('food/get/all', views.food_get_all),
     path('food/create', views.food_create),
