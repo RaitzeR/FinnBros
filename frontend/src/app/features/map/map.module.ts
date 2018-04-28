@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
 import { FoodProductModalComponent } from './food-product-modal/food-product-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MapService } from '@features/map/map.service';
+import { MatChipsModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,7 +14,9 @@ import { MapService } from '@features/map/map.service';
     AgmCoreModule.forRoot({
       apiKey: environment.googleMapsKey
     }),
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule,
+    MatButtonModule
   ],
   declarations: [MapComponent, FoodProductModalComponent],
   providers: [MapService],

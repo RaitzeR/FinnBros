@@ -18,14 +18,7 @@ export class FoodFormService {
   // Download URL
   downloadURL: Observable<string>;
 
-  // State for dropzone CSS toggling
-  isHovering: boolean;
-
   constructor(private storage: AngularFireStorage) {}
-
-  toggleHover(event: boolean) {
-    this.isHovering = event;
-  }
 
   startUpload(event: FileList) {
     // The File object

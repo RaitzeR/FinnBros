@@ -1,4 +1,5 @@
-<div class="dropzone" broDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+<div class="dropzone" [ngStyle]="{'background': bgStyle}" broDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
+  [class.hovering]="isHovering">
   <h3>Select and image</h3>
 
   <div class="file">
@@ -19,7 +20,7 @@
   </div>
 </div>
 
-<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+<form (ngSubmit)="onSubmit(heroForm)" #heroForm="ngForm">
   <mat-form-field class="input-full-width">
     <input matInput placeholder="Food's name" name="title" [(ngModel)]="data.title" required>
   </mat-form-field>

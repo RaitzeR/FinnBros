@@ -1,3 +1,11 @@
-<p>{{data.title}} is your food.
-  <br> From CATegory {{data.categories}}
-</p>
+<button mat-button (click)="editThisModal()">EDIT</button>
+<img [src]="data.image_url">
+<h2>{{data.title}}</h2>
+<p>{{data.expires | date}}</p>
+<p>{{data.street_address}}</p>
+
+<mat-chip-list class="mat-chip-list-stacked">
+  <mat-chip *ngFor="let chip of data.categories" selected="true" [color]="chip.color">
+    {{chip}}
+  </mat-chip>
+</mat-chip-list>

@@ -21,7 +21,8 @@ export class NavComponent implements OnInit {
       longitude: undefined,
       createdAt: new Date(),
       street_address: '',
-      city: ''
+      city: '',
+      image_url: ''
     };
     this.dialog.open(FoodFormComponent, {
       data: newFoodProduct,

@@ -18,4 +18,5 @@ interface FoodProduct {
   longitude: number;
   street_address: string;
   city: string;
+  image_url: string;
 }
