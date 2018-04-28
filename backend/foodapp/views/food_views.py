@@ -77,7 +77,7 @@ def food_create(request):
         new_food_post = Food(
             title=title,
             image_url=image_url,
-            user=owner,
+            user=user,
             street_address=street_address,
             latitude=latitude,
             longitude=longitude,
@@ -98,6 +98,7 @@ def food_edit(request):
     title = request.GET.get("title")
     image_url = request.GET.get("image_url")
     owner = request.GET.get("owner")
+    user = FirebaseUser.objects.get(firebase_id=owner)
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
@@ -112,7 +113,7 @@ def food_edit(request):
         food_post = Food.objects.get(pk=int(id))
         food_post.title = title
         food_post.image_url = image_url
-        food_post.owner = owner
+        food_post.owner = user
         food_post.street_address = street_address
         food_post.latitude = latitude
         food_post.longitude = longitude

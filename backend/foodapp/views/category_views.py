@@ -7,7 +7,6 @@ def categories_to_food(request):
     food_id = request.GET.get("food_id")
 
     cat_titles = cat_titles.split(",")
-    print(cat_titles)
 
     for cat in cat_titles:
         post_to_attach = Food.objects.get(pk=int(food_id))

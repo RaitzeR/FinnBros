@@ -30,6 +30,15 @@ def community_get(request):
     id = request.GET.get("id")
     comm = Community.objects.filter(pk=int(id))
 
+    # not found
+    if len(comm) == 0:
+        jsonresp = JsonResponse({"error": "user not found"}, safe=False)
+        jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+        return jsonresp
+
+    filter = request.GET.get("filter")
+
+
     #  not found
     if len(comm) == 0:
         jsonresp = JsonResponse({"error": "not found"}, safe=False)
@@ -41,7 +50,15 @@ def community_get(request):
     for comm_user in comm_users:
         user_foods = comm_user.food_set.all()
         for user_food in user_foods:
-            comm_foods.append(user_food)
+            if filter:
+                cat_titles = filter.split(",")
+                food_cats = user_food.categories.all()
+                for food_cat in food_cats:
+                    if food_cat.title in cat_titles:
+                        comm_foods.append(user_food)
+                        break
+            else:
+                comm_foods.append(user_food)
 
     comm_json = serialize('json', comm)
     comm_foods_json = serialize('json', comm_foods)
