@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./foods-list.component.scss']
 })
 export class FoodsListComponent implements OnInit {
-  public foodList = new BehaviorSubject<foodProduct[]>([]);
+  public foodList = new BehaviorSubject<FoodProduct[]>([]);
 
   constructor(private foodService: FoodService) {}
 

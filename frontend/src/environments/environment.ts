@@ -12,5 +12,6 @@ export const environment = {
     projectId: 'dont-waste-food',
     storageBucket: 'dont-waste-food.appspot.com',
     messagingSenderId: '1092162180235'
-  }
+  },
+  googleMapsKey: 'AIzaSyB5Bl41J02gvS5CD3LqMZ0cFkSmhHpdvMk'
 };

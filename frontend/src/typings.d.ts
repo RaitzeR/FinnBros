@@ -9,6 +9,9 @@ interface User {
   uid?: string;
 }
 
-interface foodProduct {
+interface FoodProduct {
   title: string;
+  categories: string;
+  latitude: number;
+  longitude: number;
 }

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FoodService {
-  private foodsList = new BehaviorSubject<foodProduct[]>([]);
+  private foodsList = new BehaviorSubject<FoodProduct[]>([]);
   constructor(private http: HttpClient) {
     console.log('init foodz');
     fetch(
@@ -14,15 +14,16 @@ export class FoodService {
       .then(foodsJson => {
         /*
         const parsed = JSON.parse(foodsJson) as any[];
-        const mapped: foodProduct[] = parsed.map(item => {
+        const mapped: FoodProduct[] = parsed.map(item => {
           return item.fields;
         });
         */
+        // console.log(foodsJson);
         this.foodsList.next(foodsJson);
       })
       .catch(e => console.error(e));
   }
-  public getFood(): BehaviorSubject<foodProduct[]> {
+  public getFood(): BehaviorSubject<FoodProduct[]> {
     return this.foodsList;
   }
 

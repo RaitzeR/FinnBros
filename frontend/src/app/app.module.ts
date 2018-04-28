@@ -9,6 +9,7 @@ import { FoodService } from './services/food.service';
 import { FirebaseModule } from './modules/firebase/firebase.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { MatButtonModule } from '@angular/material';
     NavModule,
     FirebaseModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    BrowserAnimationsModule
   ],
   providers: [FoodService],
   bootstrap: [AppComponent]
