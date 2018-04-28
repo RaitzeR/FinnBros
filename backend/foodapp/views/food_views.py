@@ -1,5 +1,6 @@
 from foodapp.models import Food, FirebaseUser
 from foodapp.views.helpers import *
+from foodapp.geolocate import GeoLocate
 from django.http import HttpResponse, JsonResponse
 from django.db import IntegrityError
 from django.core.serializers import serialize
@@ -62,6 +63,10 @@ def food_create(request):
     city = request.GET.get("city")
     country = request.GET.get("country")
 
+    geoLocate = GeoLocate(address=street_address,city=city,country=country)
+    longitude = geoLocate.geocode["lng"]
+    latitude = geoLocate.geocode["lat"]
+
     try:
         new_food_post = Food(
             title=title,
@@ -90,6 +95,11 @@ def food_edit(request):
     country = request.GET.get("country")
     id = request.GET.get("id")
 
+    if street_address and city and country:
+        geoLocate = GeoLocate(address=street_address, city=city, country=country)
+        longitude = geoLocate.geocode["lng"]
+        latitude = geoLocate.geocode["lat"]
+    
     try:
         food_post = Food.objects.get(pk=int(id))
         food_post.title = title

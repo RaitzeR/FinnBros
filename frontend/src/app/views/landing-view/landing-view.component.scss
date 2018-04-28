@@ -1,0 +1,30 @@
+:host {
+  .hero {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 90vh;
+    background: linear-gradient(rgba(255, 192, 203, 0.815), rgb(255, 192, 203)),
+      url(/assets/images/background.jpg) center center / cover no-repeat fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  .about {
+    padding: 42px;
+    max-width: 60vw;
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: auto;
+    h3 {
+      margin: 0 0 42px;
+    }
+    p {
+      line-height: 1.5;
+    }
+  }
+}
