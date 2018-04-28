@@ -68,6 +68,10 @@ def food_create(request):
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
+    expiry = request.GET.get("expiry")
+    price = request.GET.get("price")
+
+    expiry = datetime.datetime.strptime(expiry, "%d.%m.%Y").date()
 
     geoLocate = GeoLocate(address=street_address,city=city,country=country)
     longitude = geoLocate.geocode["lng"]
@@ -82,6 +86,7 @@ def food_create(request):
             latitude=latitude,
             longitude=longitude,
             city=city,
+            price=price,
             country=country
         )
         new_food_post.save()
@@ -103,6 +108,10 @@ def food_edit(request):
     city = request.GET.get("city")
     country = request.GET.get("country")
     id = request.GET.get("id")
+    expiry = request.GET.get("expiry")
+    price = request.GET.get("price")
+
+    expiry = datetime.datetime.strptime(expiry, "%d.%m.%Y").date()
 
     if street_address and city and country:
         geoLocate = GeoLocate(address=street_address, city=city, country=country)
@@ -114,6 +123,7 @@ def food_edit(request):
         food_post.title = title
         food_post.image_url = image_url
         food_post.owner = user
+        food_post.price = price
         food_post.street_address = street_address
         food_post.latitude = latitude
         food_post.longitude = longitude

@@ -46,6 +46,8 @@
 - street_address={{address}}
 - city={{city}}
 - country={{country}}
+- price={{price}}
+- expiry={{expiry}}, format: "30.12.2018"
 - @returns None/Failure
 
 ### food/edit
@@ -56,6 +58,8 @@
 - street_address={{address}}
 - city={{city}}
 - country={{country}}
+- price={{price}}
+- expiry={{expiry}}, format: "30.12.2018"
 - @returns Non/Failure
 
 ### food/buy
