@@ -1,4 +1,4 @@
-from foodapp.models import Food, FirebaseUser
+from foodapp.models import Food, FirebaseUser, Community
 from foodapp.views.helpers import *
 from foodapp.geolocate import GeoLocate
 from django.http import HttpResponse, JsonResponse
@@ -66,6 +66,8 @@ def food_create(request):
     image_url = request.GET.get("image_url")
     owner = request.GET.get("owner")
     user = FirebaseUser.objects.get(firebase_id=owner)
+    community = request.GET.get("community")
+    community = Community.objects.get(pk=int(community))
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
@@ -86,6 +88,7 @@ def food_create(request):
             street_address=street_address,
             latitude=latitude,
             longitude=longitude,
+            community=community,
             city=city,
             price=price,
             country=country,
@@ -106,6 +109,8 @@ def food_edit(request):
     image_url = request.GET.get("image_url")
     owner = request.GET.get("owner")
     user = FirebaseUser.objects.get(firebase_id=owner)
+    community = request.GET.get("community")
+    community = Community.objects.get(pk=int(community))
     street_address = request.GET.get("street_address")
     city = request.GET.get("city")
     country = request.GET.get("country")
@@ -130,6 +135,7 @@ def food_edit(request):
         food_post.latitude = latitude
         food_post.longitude = longitude
         food_post.city = city
+        food_post.community = community
         food_post.country = country
         food_post.expiry = expiry
         food_post.save()

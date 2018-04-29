@@ -38,7 +38,6 @@ def community_get(request):
 
     filter = request.GET.get("filter")
 
-
     #  not found
     if len(comm) == 0:
         jsonresp = JsonResponse({"error": "not found"}, safe=False)
@@ -48,22 +47,24 @@ def community_get(request):
     comm_users = comm[0].users.all()
     comm_foods = []
     comm_all_categories = []
-    
+
     for comm_user in comm_users:
         user_foods = comm_user.food_set.all()
         for user_food in user_foods:
-            food_cats = user_food.categories.all()
-            for food_cat in food_cats:
-                if food_cat.title not in comm_all_categories:
-                    comm_all_categories.append(food_cat.title)
-            for food_cat in food_cats:
-                if filter:
-                    cat_titles = filter.split(",")
-                    if food_cat.title in cat_titles:
+            #import pdb; pdb.set_trace()
+            if user_food.community == comm[0]:
+                food_cats = user_food.categories.all()
+                for food_cat in food_cats:
+                    if food_cat.title not in comm_all_categories:
+                        comm_all_categories.append(food_cat.title)
+                for food_cat in food_cats:
+                    if filter:
+                        cat_titles = filter.split(",")
+                        if food_cat.title in cat_titles:
+                            comm_foods.append(user_food)
+                            break
+                    else:
                         comm_foods.append(user_food)
-                        break
-                else:
-                    comm_foods.append(user_food)
 
     comm_json = serialize('json', comm)
     comm_foods_json = serialize('json', comm_foods)
