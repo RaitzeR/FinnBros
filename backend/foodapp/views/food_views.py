@@ -38,6 +38,7 @@ def food_get(request):
         category_list.append(dict_to_add)
 
     food_json[0]["fields"]["categories"] = category_list
+    food_json[0]["fields"]["user"] = food[0].user.firebase_id
     jsonresp = JsonResponse(food_json, safe=False)
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
 
