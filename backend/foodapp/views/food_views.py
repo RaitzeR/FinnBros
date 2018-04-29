@@ -1,4 +1,4 @@
-from foodapp.models import Food, FirebaseUser, Community
+from foodapp.models import Food, FirebaseUser, Community, FoodCategory
 from foodapp.views.helpers import *
 from foodapp.geolocate import GeoLocate
 from django.http import HttpResponse, JsonResponse
@@ -38,6 +38,7 @@ def food_get(request):
         category_list.append(dict_to_add)
 
     food_json[0]["fields"]["categories"] = category_list
+    food_json[0]["fields"]["firebase_id"] = food[0].user.firebase_id
     jsonresp = JsonResponse(food_json, safe=False)
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
 
@@ -100,7 +101,22 @@ def food_create(request):
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
 
-    resp = HttpResponse(200)
+    cat_titles = request.GET.get("categories")
+    food_id = new_food_post.pk
+
+    cat_titles = cat_titles.split(",")
+
+    for cat in cat_titles:
+        post_to_attach = Food.objects.get(pk=int(food_id))
+        try:
+            cat_to_attach = FoodCategory.objects.get(title=cat)
+        except FoodCategory.DoesNotExist:
+            cat_to_attach = FoodCategory(title=cat)
+            cat_to_attach.save()
+        post_to_attach.categories.add(cat_to_attach)
+    post_to_attach.save()
+
+    resp = JsonResponse({"message": new_food_post.pk})
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
@@ -143,6 +159,21 @@ def food_edit(request):
         resp = JsonResponse({"message": e.args})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
+
+    cat_titles = request.GET.get("categories")
+    food_id = food_post.pk
+
+    cat_titles = cat_titles.split(",")
+
+    for cat in cat_titles:
+        post_to_attach = Food.objects.get(pk=int(food_id))
+        try:
+            cat_to_attach = FoodCategory.objects.get(title=cat)
+        except FoodCategory.DoesNotExist:
+            cat_to_attach = FoodCategory(title=cat)
+            cat_to_attach.save()
+        post_to_attach.categories.add(cat_to_attach)
+    post_to_attach.save()
 
     resp = HttpResponse(200)
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
