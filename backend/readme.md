@@ -11,7 +11,11 @@
 ### user/get
 - id={{firebase uid}}
 
-- @returns {id,uid,first_name,last_name,email,password,street_address,city,country,cc_verified,company_verified,organisation_verified,communities}
+- @returns {
+  "user": user info,
+  "comm_foods": all user foods,
+  "comm_comms": all user communities
+}
 
 ### user/edit
 - id={{firebase uid}}
@@ -47,28 +51,7 @@
 [
   {
     "model": "foodapp.food",
-    "pk": 40,
-    "fields": {
-      "title": {{"This pasta"}},
-      "image_url": "null",
-      "user": 9,
-      "street_address": "polku",
-      "price": 5,
-      "latitude": 60.5014666,
-      "longitude": 25.1450756,
-      "city": "mäny",
-      "country": "finland",
-      "is_bought": false,
-      "buyer": 0,
-      "expiry": null,
-      "categories": []
-    }
-  }
-]
-[
-  {
-    "model": "foodapp.food",
-    "pk": 40,
+    "pk": {{backend_db_key}},
     "fields": {
       "title": {{title}},
       "image_url": {{image_url}},
