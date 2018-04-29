@@ -13,7 +13,8 @@ export class MapService {
 
   public showFoodProductDialog(product: FoodProduct) {
     this.dialog.open(FoodProductModalComponent, {
-      data: product
+      data: product,
+      panelClass: 'productDialog'
     });
     this.lat.next(product.latitude);
     this.lng.next(product.longitude);

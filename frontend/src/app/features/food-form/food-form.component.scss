@@ -1,0 +1,38 @@
+:host {
+  form {
+    padding: 20px 100px;
+    display: flex;
+    flex-direction: column;
+    .inputRow {
+      display: flex;
+      flex-direction: row;
+      .input-half-width {
+        margin: 0 5px;
+      }
+    }
+    .submit {
+      max-width: 60%;
+      margin: 42px auto 0;
+    }
+  }
+  .dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 280px;
+    border: 2px dashed #666;
+    background: white;
+    margin: 0 0 20px;
+    background: #eee;
+
+    &.hovering {
+      border: 2px solid #666;
+      color: #dadada !important;
+    }
+  }
+
+  progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+  }
+}

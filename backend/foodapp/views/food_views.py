@@ -88,7 +88,8 @@ def food_create(request):
             longitude=longitude,
             city=city,
             price=price,
-            country=country
+            country=country,
+            expiry=expiry
         )
         new_food_post.save()
     except IntegrityError as e:
@@ -130,6 +131,7 @@ def food_edit(request):
         food_post.longitude = longitude
         food_post.city = city
         food_post.country = country
+        food_post.expiry = expiry
         food_post.save()
     except IntegrityError as e:
         resp = JsonResponse({"message": e.args})

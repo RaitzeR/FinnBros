@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { FoodService } from 'app/services/food.service';
 import { MapService } from '@features/map/map.service';
+import { mapStyle } from '@features/map/mapStyle';
 
 @Component({
   selector: 'bro-map',
@@ -14,6 +15,7 @@ export class MapComponent implements OnInit {
   public zoom = new BehaviorSubject<number>(14);
 
   public foodList = new BehaviorSubject<FoodProduct[]>([]);
+  public mapStyle = mapStyle;
 
   constructor(
     private foodService: FoodService,

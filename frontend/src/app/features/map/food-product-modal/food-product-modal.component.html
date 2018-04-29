@@ -1,3 +1,13 @@
-<p>{{data.title}} is your food.
-  <br> From CATegory {{data.categories}}
-</p>
+<div class="productImage" [ngStyle]="{'background': bgStyle}"></div>
+<div class="info">
+  <button mat-button (click)="editThisModal()">EDIT</button>
+  <h2>{{data.title}}</h2>
+  <p>{{data.expires | date}}</p>
+  <p>{{data.street_address}}</p>
+
+  <mat-chip-list class="mat-chip-list-stacked">
+    <mat-chip *ngFor="let chip of data.categories" selected="true" [color]="chip.color">
+      {{chip}}
+    </mat-chip>
+  </mat-chip-list>
+</div>

@@ -48,13 +48,12 @@ def community_get(request):
     comm_users = comm[0].users.all()
     comm_foods = []
     comm_all_categories = []
+    
     for comm_user in comm_users:
         user_foods = comm_user.food_set.all()
         for user_food in user_foods:
             food_cats = user_food.categories.all()
             for food_cat in food_cats:
-                #import pdb; pdb.set_trace()
-                #from pprint import pprint;pprint()
                 if food_cat.title not in comm_all_categories:
                     comm_all_categories.append(food_cat.title)
             for food_cat in food_cats:

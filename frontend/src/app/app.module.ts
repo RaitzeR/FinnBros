@@ -10,9 +10,11 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropZoneDirective } from './directives/drop-zone.directive';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DropZoneDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     BrowserAnimationsModule
   ],
-  providers: [FoodService],
+  providers: [FoodService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
