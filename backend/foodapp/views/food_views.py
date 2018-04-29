@@ -101,7 +101,7 @@ def food_create(request):
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
 
-    resp = HttpResponse(200)
+    resp = JsonResponse({"message": new_food_post.pk})
     resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
     return resp
 
