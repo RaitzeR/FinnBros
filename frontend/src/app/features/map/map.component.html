@@ -1,4 +1,4 @@
-<agm-map [latitude]="lat | async" [longitude]="lng | async" [zoom]="zoom | async" [usePanning]="true">
+<agm-map [latitude]="lat | async" [longitude]="lng | async" [zoom]="zoom | async" [usePanning]="true" [styles]="mapStyle" >
 
   <agm-marker *ngFor="let foodProduct of foodList | async" [latitude]="foodProduct.latitude" [longitude]="foodProduct.longitude"
     (markerClick)="handleMarkerClick(foodProduct)">

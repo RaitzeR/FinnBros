@@ -11,7 +11,12 @@ interface User {
 
 interface FoodProduct {
   title: string;
-  categories: string;
+  categories: string[];
+  createdAt: Date;
+  expires: Date;
   latitude: number;
   longitude: number;
+  street_address: string;
+  city: string;
+  image_url: string;
 }
