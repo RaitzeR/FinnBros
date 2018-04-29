@@ -9,9 +9,9 @@ def img_categories(request):
     classes = imageClasses.classes
 
     jsonresp = JsonResponse(classes, safe=False)
-    print("l13@get_referrer_root")
+    print("l13@img_categories")
     print(get_referrer_root(request))
     jsonresp['Access-Control-Allow-Origin'] = get_referrer_root(request)
-    print("l16@get_referrer_root")
+    print("l16@img_categories")
     print(jsonresp['Access-Control-Allow-Origin'])
     return jsonresp
