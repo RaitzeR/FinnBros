@@ -1,5 +1,6 @@
 from modules.watson_developer_cloud import VisualRecognitionV3
 from operator import itemgetter
+import base64
 
 
 class ImageClasses:
@@ -20,12 +21,18 @@ class ImageClasses:
         )
 
         if "http" not in self.image_url:
-            with open(self.image_url, 'rb') as f:
-                response = vision.classify(images_file=f,
-                                           threshold=self.threshold,
-                                           accept_language="en",
-                                           classifier_ids=["food"],
-                                           owners=["IBM"])
+            img = base64.decodestring(self.image_url)
+            response = vision.classify(images_file=img,
+                                       threshold=self.threshold,
+                                       accept_language="en",
+                                       classifier_ids=["food"],
+                                       owners=["IBM"])
+            #with open(self.image_url, 'rb') as f:
+            #    response = vision.classify(images_file=f,
+            #                               threshold=self.threshold,
+            #                               accept_language="en",
+            #                               classifier_ids=["food"],
+            #                               owners=["IBM"])
         else:
             response = vision.classify(url=self.image_url,
                                        threshold=self.threshold,
