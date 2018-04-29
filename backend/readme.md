@@ -79,6 +79,7 @@
 - title={{food name}}
 - image_url={{img url}}
 - owner={{firebase uid}}
+- community={{community uid}}
 - street_address={{address}}
 - city={{city}}
 - country={{country}}
@@ -92,6 +93,7 @@
 - title={{food name}}
 - image_url={{img url}}
 - owner={{firebase uid}}
+- community={{community uid}}
 - street_address={{address}}
 - city={{city}}
 - country={{country}}
