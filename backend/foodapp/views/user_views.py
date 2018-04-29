@@ -9,7 +9,7 @@ def user_create(request):
 
     # Check for existing user
     exising_user = FirebaseUser.objects.filter(firebase_id=id)
-    if len(exising_user) > 1:
+    if len(exising_user) > 0:
         resp = JsonResponse({"message": "User already exists"})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
