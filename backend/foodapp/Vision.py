@@ -21,7 +21,7 @@ class ImageClasses:
         )
 
         if "http" not in self.image_url:
-            img = base64.decodestring(self.image_url)
+            img = base64.decodestring(self.image_url.encode('ascii'))
             response = vision.classify(images_file=img,
                                        threshold=self.threshold,
                                        accept_language="en",
