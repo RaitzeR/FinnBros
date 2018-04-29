@@ -8,9 +8,8 @@ def user_create(request):
     id = request.GET.get("id")
 
     # Check for existing user
-    try:
-        exising_user = FirebaseUser.objects.get(firebase_id=id)
-    except FirebaseUser.MultipleObjectsReturned:
+    exising_user = FirebaseUser.objects.filter(firebase_id=id)
+    if len(exising_user) > 1:
         resp = JsonResponse({"message": "User already exists"})
         resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
         return resp
