@@ -20,23 +20,23 @@ class ImageClasses:
             version="2018-03-19"
         )
 
-        if "http" not in self.image_url:
-            img = base64.decodestring(self.image_url.encode('ascii'))
-            with open('test.jpg','wb') as fh:
-                fh.write(base64.decodebytes(img))
+        #if "http" not in self.image_url:
+        img = base64.decodestring(self.image_url.encode('ascii'))
+        with open('static/images/test.jpg','wb') as fh:
+            fh.write(base64.decodebytes(img))
 
-            with open('test.jpg', 'rb') as f:
-                response = vision.classify(images_file=f,
-                                           threshold=self.threshold,
-                                           accept_language="en",
-                                           classifier_ids=["food"],
-                                           owners=["IBM"])
-        else:
-            response = vision.classify(url=self.image_url,
+        with open('static/images/test.jpg', 'rb') as f:
+            response = vision.classify(images_file=f,
                                        threshold=self.threshold,
                                        accept_language="en",
                                        classifier_ids=["food"],
                                        owners=["IBM"])
+        #else:
+        #    response = vision.classify(url=self.image_url,
+        #                               threshold=self.threshold,
+        #                               accept_language="en",
+        #                               classifier_ids=["food"],
+        #                               owners=["IBM"])
 
         dictionaryList = response["images"][0]["classifiers"][0]["classes"]
         return sorted(dictionaryList, key=itemgetter("score"), reverse=True)
