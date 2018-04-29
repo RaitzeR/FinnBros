@@ -7,6 +7,14 @@ from django.core.serializers import serialize
 def user_create(request):
     id = request.GET.get("id")
 
+    # Check for existing user
+    try:
+        exising_user = FirebaseUser.objects.get(firebase_id=id)
+    except FirebaseUser.MultipleObjectsReturned:
+        resp = JsonResponse({"message": "User already exists"})
+        resp['Access-Control-Allow-Origin'] = get_referrer_root(request)
+        return resp
+
     try:
         new_user = FirebaseUser(firebase_id=id)
         new_user.save()
