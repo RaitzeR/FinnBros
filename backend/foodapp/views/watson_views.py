@@ -6,11 +6,9 @@ import json
 # Give image categories to front-end
 def img_categories(request):
     #url = request.GET.get("image_url")
-    #import pdb; pdb.set_trace()
-    body_unicode = request.body.decode('utf-8')
-    print(body_unicode)
+    img64 = request.body.decode('utf-8')
 
-    imageClasses = ImageClasses(image_url=url, threshold="0.5")
+    imageClasses = ImageClasses(image_url=img64, threshold="0.5")
     classes = imageClasses.classes
 
     jsonresp = JsonResponse(classes, safe=False)
