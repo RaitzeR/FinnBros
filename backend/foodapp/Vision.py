@@ -22,17 +22,15 @@ class ImageClasses:
 
         if "http" not in self.image_url:
             img = base64.decodestring(self.image_url.encode('ascii'))
-            response = vision.classify(images_file=img,
-                                       threshold=self.threshold,
-                                       accept_language="en",
-                                       classifier_ids=["food"],
-                                       owners=["IBM"])
-            #with open(self.image_url, 'rb') as f:
-            #    response = vision.classify(images_file=f,
-            #                               threshold=self.threshold,
-            #                               accept_language="en",
-            #                               classifier_ids=["food"],
-            #                               owners=["IBM"])
+            with open('test.jpg','wb') as fh:
+                fh.write(base64.decodebytes(img))
+
+            with open('test.jpg', 'rb') as f:
+                response = vision.classify(images_file=f,
+                                           threshold=self.threshold,
+                                           accept_language="en",
+                                           classifier_ids=["food"],
+                                           owners=["IBM"])
         else:
             response = vision.classify(url=self.image_url,
                                        threshold=self.threshold,
