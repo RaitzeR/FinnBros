@@ -4,7 +4,10 @@ from foodapp.views.helpers import *
 
 # Give image categories to front-end
 def img_categories(request):
-    url = request.GET.get("image_url")
+    #url = request.GET.get("image_url")
+    request_body = request.body
+    from pprint import pprint;pprint(request_body)
+
     imageClasses = ImageClasses(image_url=url, threshold="0.5")
     classes = imageClasses.classes
 
