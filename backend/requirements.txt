@@ -14,6 +14,7 @@ gunicorn==19.7.1
 hyperlink==18.0.0
 idna==2.6
 incremental==17.5.0
+Pillow==5.1.0
 psycopg2==2.7.4
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
